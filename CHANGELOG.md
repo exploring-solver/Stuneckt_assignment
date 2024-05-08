@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.1.0...v1.2.0) (2024-05-08)
+
+
+### Features
+
+* **api:** initialize backend project with basic setup of Authorization and post, and initialized the frontend ([90f824b](https://github.com/exploring-solver/Stuneckt_assignment/commit/90f824bd488032c0ff644937dfa73c2806161410))
+
 ## 1.1.0 (2024-05-08)
 
 
