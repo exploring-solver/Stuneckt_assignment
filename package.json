@@ -1,11 +1,11 @@
 {
   "name": "stuneckt_assignment",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This project's goal is to build API endpoints for a microblogging platform like Twitter / LinkedIn where users can post content and follow each other.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release":"standard-version"
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "",
