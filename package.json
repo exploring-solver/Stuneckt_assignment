@@ -1,6 +1,6 @@
 {
   "name": "stuneckt_assignment",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "This project's goal is to build API endpoints for a microblogging platform like Twitter / LinkedIn where users can post content and follow each other.",
   "main": "index.js",
   "scripts": {
