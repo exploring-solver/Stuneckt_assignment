@@ -1,55 +1,58 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const postSchema = new Schema({
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    textContent: {
-      type: String,
-      required: true
-    },
-    media: {
-        type: [String],
-        default: []
-    },
-    timestamp: {
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  textContent: {
+    type: String,
+    required: true,
+  },
+  media: {
+    type: [String],
+    default: [],
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  retweets: {
+    type: Number,
+    default: 0,
+  },
+  comments: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+      },
+      textContent: {
+        type: String,
+        required: true,
+      },
+      timestamp: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+      },
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
-    retweets: {
-        type: Number,
-        default: 0
-    },
-    comments: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
-        },
-        textContent: {
-            type: String,
-            required: true
-        },
-        timestamp: {
-            type: Date,
-            default: Date.now
-        }
-    }],
-    hashtags: {
-        type: [String],
-        default: []
-    },
-    mentions: {
-        type: [String],
-        default: []
-    }
+  ],
+  hashtags: {
+    type: [String],
+    default: [],
+  },
+  mentions: {
+    type: [String],
+    default: [],
+  },
 });
 
 const Post = mongoose.model('Post', postSchema);

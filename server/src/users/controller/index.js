@@ -47,7 +47,6 @@ module.exports.signUp = async (res, parameters) => {
   });
 };
 
-
 module.exports.login = async (res, parameters) => {
   const { emailOrUsername, password } = parameters;
 

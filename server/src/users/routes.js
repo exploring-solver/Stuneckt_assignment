@@ -15,7 +15,7 @@ router.post(
   }
 );
 
-//TODO : Login router
+// TODO : Login router
 router.post(
   '/api/v1/login',
   validateSchemas.inputs(schemas.login, 'body'),
@@ -24,13 +24,16 @@ router.post(
   }
 );
 
-//TODO : User Details router
-router.get('/api/v1/user/details', validateAuth.checkIfAuthenticated,
-(req, res) => {
-  // Use req.user to access the authenticated user's information
-  res.json({ user: req.user });
-});
+// TODO : User Details router
+router.get(
+  '/api/v1/user/details',
+  validateAuth.checkIfAuthenticated,
+  (req, res) => {
+    // Use req.user to access the authenticated user's information
+    res.json({ user: req.user });
+  }
+);
 
-//TODO : Update Details
+// TODO : Update Details
 
 module.exports = router;
