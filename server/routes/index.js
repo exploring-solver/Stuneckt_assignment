@@ -1,7 +1,7 @@
 const status = require('../src/health/routes');
 const users = require('../src/users/routes');
 const posts = require('../src/posts/routes');
-const validateAuth = require('../middlewares/validateAuth');
+// const validateAuth = require('../middlewares/validateAuth');
 // const getData = require('../middlewares/getData');
 
 module.exports = (app) => {
