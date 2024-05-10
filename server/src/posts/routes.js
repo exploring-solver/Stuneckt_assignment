@@ -28,7 +28,7 @@ router.get(
   (req, res) => {
     console.log('Received request to get all posts for existing user');
     // console.log('User:', req.user); // Assuming req.user contains user information
-    controller.getPostsForUser(req, res);
+    controller.getPostsForCurrUser(req, res);
   }
 );
 
@@ -52,5 +52,16 @@ router.put(
     controller.updatePost(req, res);
   }
 );
+
+router.get(
+  '/api/v1/posts/user/:id',
+  validateAuth.checkIfAuthenticated,
+  (req, res) => {
+    console.log('Received request to get a particular user\'s posts');
+    // console.log('User:', req.user); // Assuming req.user contains user information
+    controller.getUserPosts(req, res);
+  }
+);
+
 
 module.exports = router;

@@ -1,6 +1,8 @@
 // const config = require('../../../config');
 const Post = require('../models/mongoose');
+const Schema = require('../../users/models/mongoose')
 
+// Controller: create a post
 const createPost = async (req, res) => {
   console.log('Received request to create post');
   console.log('User ID:', req.user);
@@ -27,22 +29,28 @@ const createPost = async (req, res) => {
   }
 };
 
-// TODO : get all posts
+// Controller : get all posts
 const getAllPosts = async (req, res) => {
   console.log('Received request to get all posts');
+  const { page = 1, limit = 10 } = req.query;
+
   try {
-    const posts = await Post.find();
-    res.status(200).json({ message: 'Posts retrieved successfully', posts });
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(limit, 10),
+    };
+
+    const result = await Post.paginate({}, options);
+    res.status(200).json({ message: 'Posts retrieved successfully', result });
   } catch (error) {
     console.error('Error retrieving posts:', error);
-    res
-      .status(500)
-      .json({ message: 'Failed to retrieve posts', error: error.message });
+    res.status(500).json({ message: 'Failed to retrieve posts', error: error.message });
   }
 };
 
-// TODO : get all for existing user
-const getPostsForUser = async (req, res) => {
+
+// Controller: get all for existing user
+const getPostsForCurrUser = async (req, res) => {
   console.log('Received request to get posts for user');
   console.log('User ID:', req.user);
   try {
@@ -58,7 +66,7 @@ const getPostsForUser = async (req, res) => {
   }
 };
 
-// TODO : delete post
+// Controller: delete post
 const deletePost = async (req, res) => {
   console.log('Received request to delete post');
   const postId = req.params.id;
@@ -73,7 +81,7 @@ const deletePost = async (req, res) => {
   }
 };
 
-// TODO : update post
+// Controller : update post
 const updatePost = async (req, res) => {
   console.log('Received request to update post');
   const postId = req.params.id;
@@ -95,10 +103,55 @@ const updatePost = async (req, res) => {
   }
 };
 
+//Controller: Get a user's posts using their id
+
+const getUserPosts = async (req, res) => {
+
+  const username = req.params.id;
+
+  try {
+    const user = await Schema.User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userId = user._id;
+    const { page = 1, limit = 10 } = req.query;
+
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(limit, 10),
+    };
+
+    const result = await Post.paginate({ user: userId }, options);
+    res.status(200).json({
+      message: 'User posts retrieved successfully',
+      posts: result.docs,
+      pagination: {
+        totalDocs: result.totalDocs,
+        limit: result.limit,
+        totalPages: result.totalPages,
+        page: result.page,
+        hasNextPage: result.hasNextPage,
+        hasPrevPage: result.hasPrevPage,
+        nextPage: result.nextPage,
+        prevPage: result.prevPage,
+      },
+    });
+  } catch (error) {
+    console.error('Error retrieving user posts:', error);
+    res.status(500).json({
+      message: 'Failed to retrieve user posts',
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createPost,
   getAllPosts,
-  getPostsForUser,
+  getPostsForCurrUser,
   deletePost,
   updatePost,
+  getUserPosts
 };

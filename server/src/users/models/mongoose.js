@@ -19,6 +19,18 @@ const User = mongoose.model(
       type: String,
       required: true,
     },
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   'users'
 );
