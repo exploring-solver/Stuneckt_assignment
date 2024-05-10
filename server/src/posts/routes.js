@@ -12,17 +12,45 @@ router.post(
   validateSchemas.inputs(schemas.post, 'body'),
   (req, res) => {
     console.log('Received request to create a post');
-    console.log('User:', req.user); // Assuming req.user contains user information
+    // console.log('User:', req.user); // Assuming req.user contains user information
     controller.createPost(req, res);
   }
 );
 
-// TODO : get all posts
+router.get('/api/v1/posts', validateAuth.checkIfAuthenticated, (req, res) => {
+  console.log('Received request to get all posts');
+  controller.getAllPosts(req, res);
+});
 
-// TODO : get all for existing user
+router.get(
+  '/api/v1/posts/user',
+  validateAuth.checkIfAuthenticated,
+  (req, res) => {
+    console.log('Received request to get all posts for existing user');
+    // console.log('User:', req.user); // Assuming req.user contains user information
+    controller.getPostsForUser(req, res);
+  }
+);
 
-// TODO : delete post
+router.delete(
+  '/api/v1/posts/:id',
+  validateAuth.checkIfAuthenticated,
+  (req, res) => {
+    console.log('Received request to delete post');
+    // console.log('User:', req.user); // Assuming req.user contains user information
+    controller.deletePost(req, res);
+  }
+);
 
-// TODO : update post
+router.put(
+  '/api/v1/posts/:id',
+  validateAuth.checkIfAuthenticated,
+  validateSchemas.inputs(schemas.post, 'body'),
+  (req, res) => {
+    console.log('Received request to update post');
+    // console.log('User:', req.user); // Assuming req.user contains user information
+    controller.updatePost(req, res);
+  }
+);
 
 module.exports = router;
