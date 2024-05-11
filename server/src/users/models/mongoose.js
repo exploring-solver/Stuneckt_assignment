@@ -1,7 +1,6 @@
 const mongoose = require('../../../services/mongoose');
 
-const User = mongoose.model(
-  'User',
+const UserSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -32,8 +31,10 @@ const User = mongoose.model(
       },
     ],
   },
-  'users'
+  { timestamps: true } // Add timestamps for createdAt and updatedAt
 );
+
+const User = mongoose.model('User', UserSchema);
 
 module.exports = {
   User,

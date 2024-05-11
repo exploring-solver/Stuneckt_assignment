@@ -21,10 +21,22 @@ router.delete('/unfollow/:username',
     }
 );
 
-router.get('/followers/:username',
+router.get('/followcount/:username',
     validateAuth.checkIfAuthenticated,
     function (req, res) {
         controller.getTotalFollowersFollowing(req, res);
+    }
+);
+router.get('/followers/:username',
+    validateAuth.checkIfAuthenticated,
+    function (req, res) {
+        controller.getAllFollowers(req, res);
+    }
+);
+router.get('/following/:username',
+    validateAuth.checkIfAuthenticated,
+    function (req, res) {
+        controller.getAllFollowing(req, res);
     }
 );
 

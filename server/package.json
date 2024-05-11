@@ -31,11 +31,11 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-ip": "^1.0.4",
-    "faker": "^6.6.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.15"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",

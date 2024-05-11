@@ -1,10 +1,10 @@
 const Bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const config = require('../../../config');
 const schemes = require('../models/mongoose');
+const { faker } = require('@faker-js/faker');
 
-module.exports.signUp = async (res, parameters) => {
+const signUp = async (res, parameters) => {
   const {
     password,
     passwordConfirmation,
@@ -13,6 +13,22 @@ module.exports.signUp = async (res, parameters) => {
     name,
     lastName,
   } = parameters;
+
+  // Check if username or email already exist
+  const existingUser = await schemes.User.findOne({
+    $or: [{ email }, { username }],
+  });
+
+  if (existingUser) {
+    if (res) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Username or email already exists',
+      });
+    } else {
+      throw new Error('Username or email already exists');
+    }
+  }
 
   if (password === passwordConfirmation) {
     const newUser = schemes.User({
@@ -32,22 +48,35 @@ module.exports.signUp = async (res, parameters) => {
         { expiresIn: config.TOKEN_EXPIRES_IN }
       );
 
-      return res.status(201).json({ token });
+      if (res) {
+        return res.status(201).json({ token });
+      } else {
+        return { token };
+      }
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: error,
-      });
+      if (res) {
+        return res.status(400).json({
+          status: 400,
+          message: error,
+        });
+      } else {
+        throw error;
+      }
     }
   }
 
-  return res.status(400).json({
-    status: 400,
-    message: 'Passwords are different, try again!!!',
-  });
+  if (res) {
+    return res.status(400).json({
+      status: 400,
+      message: 'Passwords are different, try again!!!',
+    });
+  } else {
+    throw new Error('Passwords are different, try again!!!');
+  }
 };
 
-module.exports.login = async (res, parameters) => {
+
+const login = async (res, parameters) => {
   const { emailOrUsername, password } = parameters;
 
   try {
@@ -88,7 +117,7 @@ module.exports.login = async (res, parameters) => {
   }
 };
 
-module.exports.userDetails = async (res, parameters) => {
+const userDetails = async (res, parameters) => {
   const { userId } = parameters;
 
   try {
@@ -110,4 +139,42 @@ module.exports.userDetails = async (res, parameters) => {
       message: 'Internal server error',
     });
   }
+};
+
+
+
+async function createMockUsers(numberOfUsers) {
+  try {
+    console.log(`Creating ${numberOfUsers} mock users...`);
+    for (let i = 0; i < numberOfUsers; i++) {
+      //faker to generate random data
+      const username = faker.internet.userName();
+      const email = faker.internet.email();
+      const name = faker.person.firstName();
+      const lastName = faker.person.lastName();
+      const password = faker.internet.password(); 
+      console.log(`Creating user ${i + 1}: ${username}`);
+      await signUp(null, { // Pass null as the response object since we're not using it here
+        password,
+        passwordConfirmation: password, // Password confirmation doesn't matter for mock data
+        email,
+        username,
+        name,
+        lastName,
+      });
+
+      console.log(`User ${i + 1} created: ${username} (${email})`);
+    }
+    console.log(`Successfully created ${numberOfUsers} mock users.`);
+  } catch (error) {
+    console.error('Error creating mock users:', error);
+    throw error; 
+  }
+}
+
+module.exports = {
+  signUp,
+  login,
+  createMockUsers,
+  userDetails
 };

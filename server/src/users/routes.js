@@ -15,7 +15,7 @@ router.post(
   }
 );
 
-// TODO : Login router
+// API : Login router
 router.post(
   '/api/v1/login',
   validateSchemas.inputs(schemas.login, 'body'),
@@ -24,13 +24,28 @@ router.post(
   }
 );
 
-// TODO : User Details router
+// API : User Details router
 router.get(
   '/api/v1/user/details',
   validateAuth.checkIfAuthenticated,
   (req, res) => {
     // Use req.user to access the authenticated user's information
     res.json({ user: req.user });
+  }
+);
+
+// API: Mock users
+router.post(
+  '/create-mock-users',
+  validateAuth.checkIfAuthenticated,
+  async (req, res) => {
+    try {
+      await controller.createMockUsers(10); // Number of users to create
+      res.status(200).json({ message: 'Mock users created successfully' });
+    } catch (error) {
+      console.error('Error creating mock users:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
   }
 );
 
