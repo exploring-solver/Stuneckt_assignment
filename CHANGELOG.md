@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.2.4...v1.3.0) (2024-05-11)
+
+
+### Features
+
+* following functionality completed with mock data feeder for users ([0de85a5](https://github.com/exploring-solver/Stuneckt_assignment/commit/0de85a52bd79361f857a2b07b91e684b3d9a8d89))
+
 ### [1.2.4](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.2.3...v1.2.4) (2024-05-10)
 
 ### [1.2.3](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.2.2...v1.2.3) (2024-05-10)
