@@ -7,9 +7,9 @@ const Navbar: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between items-center">
                     <div className="flex-shrink-0">
-                        <a href="/" className="text-white font-bold">
+                        <Link href="/" className="text-white font-bold">
                             Stuneckt-Online Blogging Platform
-                        </a>
+                        </Link>
                     </div>
                     <div className="flex">
                         <Link href="/" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
@@ -20,9 +20,9 @@ const Navbar: React.FC = () => {
                                 <Link href="/profile" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
                                     Profile
                                 </Link>
-                                <a target= "_blank"href="https://github.com/exploring-solver/Stuneckt_assignment" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
+                                <Link target= "_blank"href="https://github.com/exploring-solver/Stuneckt_assignment" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
                                     Github
-                                </a>
+                                </Link>
                                 <button onClick={logout} className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
                                     Logout
                                 </button>

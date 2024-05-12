@@ -59,7 +59,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold">{user.username}'s Profile</h1>
+      <h1 className="text-3xl font-bold">{user.username}&apos; Profile</h1>
       <div className="border-t border-gray-200 mt-4 pt-4">
         <p>Email: {user.email}</p>
         <p>User ID: {user.id}</p>
