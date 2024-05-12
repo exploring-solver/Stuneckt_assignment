@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.4.0...v1.4.1) (2024-05-12)
+
+
+### Bug Fixes
+
+* **frontend:** signup had a bug ([a0b2493](https://github.com/exploring-solver/Stuneckt_assignment/commit/a0b2493e0b093ebdbe65d81b5d16bde38c7168bb))
+
 ## [1.4.0](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.3.1...v1.4.0) (2024-05-12)
 
 
