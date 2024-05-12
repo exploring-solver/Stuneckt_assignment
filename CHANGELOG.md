@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.4.3...v1.4.4) (2024-05-12)
+
+
+### Bug Fixes
+
+* **frontend:** removed warnings 2 ([74cd3cb](https://github.com/exploring-solver/Stuneckt_assignment/commit/74cd3cb466f4a2f5a50df1b408b0cc7093ef6ff3))
+* **frontend:** removed warnings 3 ([9502858](https://github.com/exploring-solver/Stuneckt_assignment/commit/9502858523b42742db4de4cd57f00565b4fd62e2))
+* **frontend:** removed warnings 3 ([402ff14](https://github.com/exploring-solver/Stuneckt_assignment/commit/402ff1461177444aad79036d4cc393eb80f17fb8))
+
 ### [1.4.3](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.4.2...v1.4.3) (2024-05-12)
 
 
