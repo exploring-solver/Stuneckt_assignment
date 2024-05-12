@@ -6,6 +6,9 @@ const follow = require('../src/follow/routes');
 // const getData = require('../middlewares/getData');
 
 module.exports = (app) => {
+  app.get('/', (req, res) => {
+    res.send('Welcome to the Snucket API made by aman sharma @exploring-solver!')
+  })
   app.use('/status', status);
   app.use('/users', users);
   app.use('/posts', posts);

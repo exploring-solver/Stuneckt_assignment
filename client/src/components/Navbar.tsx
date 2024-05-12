@@ -1,7 +1,7 @@
 import { useAuth } from "@/utils/auth";
 import Link from 'next/link';
 const Navbar: React.FC = () => {
-    const { isAuthenticated, user ,logout} = useAuth();
+    const { isAuthenticated ,logout} = useAuth();
     return (
         <nav className="p-4">
             <div className="max-w-7xl mx-auto px-4">

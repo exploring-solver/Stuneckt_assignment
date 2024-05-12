@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PostItem from './PostItem';
-import { useAuth } from '@/utils/auth';
 
 const Posts: React.FC = () => {
     const [posts, setPosts] = useState<any[]>([]);

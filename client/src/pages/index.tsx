@@ -4,14 +4,16 @@ import { useAuth } from '../utils/auth';
 import Posts from '@/components/Posts';
 
 const Home: React.FC = () => {
-  
-  const { isAuthenticated, user ,token} = useAuth();
+
+  const { isAuthenticated, user, token } = useAuth();
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [formData, setFormData] = useState({
+    name: '',
+    lastName: '',
     username: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    passwordConfirmation: '',
   });
   // console.log("Token" ,token)
   const handleToggleForm = () => {
@@ -33,10 +35,10 @@ const Home: React.FC = () => {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization' : `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      
+
       body: JSON.stringify({
         emailOrUsername: formData.email,
         password: formData.password,
@@ -61,13 +63,14 @@ const Home: React.FC = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-
       },
       body: JSON.stringify({
+        name: formData.name,
+        lastName: formData.lastName,
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword,
+        passwordConfirmation: formData.passwordConfirmation,
       }),
     });
 
@@ -81,15 +84,16 @@ const Home: React.FC = () => {
     }
   };
 
+
   return (
     <Layout>
       {isAuthenticated ? (
         <div className='w-[90%] m-auto'>
           <h1 className="text-xl font-medium text-white border-b-2 w-fit">Welcome, {user?.username}!</h1>
-<br />
+          <br />
           <p className="text-white text-xl">Latest posts(With Pagination):</p>
           <br />
-          <Posts/>
+          <Posts />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-full">
@@ -99,6 +103,23 @@ const Home: React.FC = () => {
           </h1>
           {isSigningUp ? (
             <form className="flex flex-col items-center gap-2" onSubmit={handleSignUp}>
+              <input
+                className='custom-input'
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <input
+                className='custom-input'
+                type="text"
+                placeholder="Last Name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+
               <input
                 className='custom-input'
                 type="text"
@@ -127,8 +148,8 @@ const Home: React.FC = () => {
                 className='custom-input'
                 type="password"
                 placeholder="Confirm Password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
+                name="passwordConfirmation"
+                value={formData.passwordConfirmation}
                 onChange={handleChange}
               />
               <button type="submit" className="btn-primary">

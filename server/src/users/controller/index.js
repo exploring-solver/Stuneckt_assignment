@@ -153,7 +153,7 @@ async function createMockUsers(numberOfUsers) {
       const name = faker.person.firstName();
       const lastName = faker.person.lastName();
       const password = faker.internet.password(); 
-      console.log(`Creating user ${i + 1}: ${username}`);
+      console.log(`Creating user ${i + 1}: ${username}and password ${password}`);
       await signUp(null, { // Pass null as the response object since we're not using it here
         password,
         passwordConfirmation: password, // Password confirmation doesn't matter for mock data
