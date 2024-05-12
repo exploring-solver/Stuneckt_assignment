@@ -38,9 +38,17 @@ const getAllPosts = async (req, res) => {
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(limit, 10),
+      populate: 'user', // Populate the 'user' field with the username
+      select: '-__v', // Exclude the '__v' field from the query
     };
 
     const result = await Post.paginate({}, options);
+    const postsWithUsername = result.docs.map(post => ({
+      ...post.toJSON(),
+      user: post.user.username, // Replace the user object with the username
+    }));
+    result.docs = postsWithUsername;
+
     res.status(200).json({ message: 'Posts retrieved successfully', result });
   } catch (error) {
     console.error('Error retrieving posts:', error);

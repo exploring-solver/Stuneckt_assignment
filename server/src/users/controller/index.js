@@ -172,9 +172,34 @@ async function createMockUsers(numberOfUsers) {
   }
 }
 
+const userDetailsByUsername = async (res, parameters) => {
+  const { username } = parameters;
+
+  try {
+    // Fetch user details based on username
+    const user = await schemes.User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({
+        status: 404,
+        message: 'User not found',
+      });
+    }
+
+    // Return user details
+    return res.status(200).json({ user });
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      message: 'Internal server error',
+    });
+  }
+};
+
 module.exports = {
   signUp,
   login,
   createMockUsers,
-  userDetails
+  userDetails,
+  userDetailsByUsername
 };

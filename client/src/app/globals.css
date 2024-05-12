@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255; /* White text color */
+  --background-start-rgb: 0, 0, 0; /* Black background start color */
+  --background-end-rgb: 0, 0, 0; /* Black background end color */
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 0, 0, 0; /* Black text color */
+    --background-start-rgb: 214, 219, 220; /* Light gray background start color */
+    --background-end-rgb: 255, 255, 255; /* White background end color */
   }
 }
 
@@ -30,4 +30,51 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.custom-input {
+  /* Remove default styles */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Border and box shadow */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Padding and margin */
+  padding: 10px;
+  margin: 5px 0;
+  /* Font and text styles */
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #f7e7e7; /* Dark text color */
+  /* Transition for smooth effects */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect */
+.custom-input:hover {
+  border-color: #aaa;
+}
+
+/* Focus effect */
+.custom-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+a:hover{
+  text-decoration: underline;
+}
+button:hover{
+  background: #2b2a2a;
+  
+}
+button{
+  padding: 5px;
+  border: white 1px;
+  border-radius: 10px;
+  border-style:solid;
 }

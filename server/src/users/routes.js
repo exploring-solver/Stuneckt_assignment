@@ -49,6 +49,23 @@ router.post(
   }
 );
 
-// TODO : Update Details
+// API : user details
+router.post(
+  '/:username',
+  validateAuth.checkIfAuthenticated,
+  async (req, res) => {
+    const { username } = req.params;
+    try {
+      const result = await controller.userDetailsByUsername(res, { username });
+      return result;
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+      return res.status(500).json({
+        status: 500,
+        message: 'Internal server error',
+      });
+    }
+  }
+);
 
 module.exports = router;
