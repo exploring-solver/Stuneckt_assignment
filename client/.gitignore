@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/pages/login.tsx
+/src/pages/dashboard.tsx
+/src/pages/signup.tsx
+/src/pages/[username].tsx
