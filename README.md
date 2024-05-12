@@ -16,41 +16,45 @@ This project aims to build API endpoints for a microblogging platform similar to
 
 ## Setup Instructions
 
-1. Clone the repository: `git clone https://github.com/yourusername/stuneckt-backend.git`
-2. Install dependencies: `npm install`
-3. Set up environment variables: Create a `.env` file in the root directory and add the following variables:
-   ```
-   PORT=5000
-   MONGODB_URI=your_mongodb_uri
-   ```
-4. Start the server: `npm start`
+1. Clone the repository: `git clone https://github.com/exploring-solver/Stuneckt_assignment.git`
+2. Install dependencies for client: `cd client` `npm install`
+2. Install dependencies for server: `cd client` `npm install`
+3. Set up environment variables: Create a `.env` file in the root directory as per the format of  `.env.example` file
+4. Start the server: `npm run dev`
+4. Start the client: `npm run dev`
 5. The server should now be running on `http://localhost:5000`.
+5. The client should now be running on `http://localhost:3000`.
 
 ## API Endpoints
 
 - `GET /api/users`: Get all users.
-- `GET /api/users/:id`: Get a user by ID.
-- `POST /api/users`: Create a new user.
-- `PUT /api/users/:id`: Update a user.
-- `DELETE /api/users/:id`: Delete a user.
+- `GET /users/api/v1/user/details`: Get logged in user's details.
+- `GET /users/:username`: Get a user's details deom username.
+- `POST /users/api/v1/signup`: Create a new user.
+- `POST /users/api/v1/login`: Login a user.
+- `POST /users/create-mock-users`: Create mock users.
+- `PUT /api/users/`: Update a user.
 
-- `GET /api/posts`: Get all posts.
-- `GET /api/posts/:id`: Get a post by ID.
-- `POST /api/posts`: Create a new post.
+- `GET /posts/api/v1/posts`: Get all posts.
+- `GET /posts/api/v1/posts/user`: Get logged in user's Posts.
+- `GET /posts/api/v1/posts/user/:username`: Get a perticular user's Posts.
+- `POST /posts/api/v1/posts`: Create a new post.
 - `PUT /api/posts/:id`: Update a post.
-- `DELETE /api/posts/:id`: Delete a post.
+- `GET /posts/api/v1/posts?page=M&limit=N`: Get Paginated posts from M to N.
 
-- `GET /api/users/:id/followers`: Get all followers of a user.
-- `POST /api/users/:id/followers/:followerId`: Follow a user.
-- `DELETE /api/users/:id/followers/:followerId`: Unfollow a user.
+- `GET /follow/followcount/:username`: Get all followers count of a user.
+- `GET /follow/follower/:username`: Get all followers of a user.
+- `GET /follow/following/:username`: Get all following  of a user.
+- `POST /follow/follow/:username`: Follow a user.
+- `DELETE /follow/unfollow/:username`: Unfollow a user.
 
 ## Mock Data Feeder Script
 
-To use the mock data feeder script, run the following command:
+To use the mock data feeder script, go to following route:
 
-```
-npm run seed
-```
+Authorization Required
+POST: /users/create-mock-users
+
 
 This will populate the database with mock users and posts for testing purposes.
 
@@ -60,6 +64,8 @@ This will populate the database with mock users and posts for testing purposes.
 
 ## Technologies Used
 
+- Next.js
+- TypeScript
 - Node.js
 - Express.js
 - MongoDB
@@ -67,12 +73,9 @@ This will populate the database with mock users and posts for testing purposes.
 
 ## Deployment
 
-The backend is deployed on [Heroku](https://www.heroku.com/) and can be accessed at [API Base URL](https://your-heroku-app.herokuapp.com/).
+The backend is deployed on [Vercel](https://stuneckt-assignment-c16d.vercel.app/) and can be accessed at [API Base URL (Render)](https://stuneckt-assignment.onrender.com).
 
 ## Contributors
 
-- Your Name (@yourgithubusername)
+- Aman Sharma (@exploring-solver)
 
-```
-
-Feel free to customize the content as per your project specifics. Let me know if you need any more help!
