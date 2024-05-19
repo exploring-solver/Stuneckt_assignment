@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.4.4...v1.4.5) (2024-05-19)
+
+
+### Features
+
+* **server panel:** Added an adminJs Panel for data testing and management ([e6d44f2](https://github.com/exploring-solver/Stuneckt_assignment/commit/e6d44f2c0054b2514c41051256551fdf40c21610))
+
 ### [1.4.4](https://github.com/exploring-solver/Stuneckt_assignment/compare/v1.4.3...v1.4.4) (2024-05-12)
 
 
