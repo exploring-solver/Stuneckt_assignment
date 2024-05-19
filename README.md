@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This project aims to build API endpoints for a microblogging platform similar to Twitter or LinkedIn. Users can post content and follow each other. The backend is implemented in [Node.js](https://nodejs.org/) using [Express.js](https://expressjs.com/) framework, and data is stored in a [MongoDB](https://www.mongodb.com/) database.
+This project aims to build API endpoints for a microblogging platform similar to Twitter or LinkedIn. Users can post content and follow each other. The backend is implemented in [Node.js](https://nodejs.org/) using [Express.js](https://expressjs.com/) framework, and data is stored in a [MongoDB](https://www.mongodb.com/) database and NextJs and TypeScript is used for Frontend.
 
 ## Features
 
@@ -58,9 +58,11 @@ POST: /users/create-mock-users
 
 This will populate the database with mock users and posts for testing purposes.
 
-## Screenshots
+## Minimal Frontend to Showcase the API
 
-![Frontend Screenshot](path/to/frontend/screenshot.png)
+![Screenshot 2024-05-12 235532](https://github.com/exploring-solver/Stuneckt_assignment/assets/123443485/c1d7c9b0-2677-49cb-9056-ebc12baa1dcc)
+![image](https://github.com/exploring-solver/Stuneckt_assignment/assets/123443485/7bcd9659-043a-42e5-a8ce-273eb83df0fa)
+
 
 ## Technologies Used
 
