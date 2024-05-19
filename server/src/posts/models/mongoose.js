@@ -1,11 +1,11 @@
-const mongoose = require('../../../services/mongoose');
+const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
     required: true,
   },
@@ -32,7 +32,7 @@ const postSchema = new Schema({
   comments: [
     {
       user: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true,
       },

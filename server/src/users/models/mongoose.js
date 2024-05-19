@@ -1,4 +1,5 @@
-const mongoose = require('../../../services/mongoose');
+const { Schema } = require('mongoose');
+const { mongoose } = require('../../../services/mongoose');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -20,13 +21,13 @@ const UserSchema = new mongoose.Schema(
     },
     followers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
       },
     ],
     following: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
       },
     ],
@@ -36,6 +37,4 @@ const UserSchema = new mongoose.Schema(
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = {
-  User,
-};
+module.exports = User;
