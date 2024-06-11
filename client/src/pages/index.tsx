@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import { useAuth } from '../utils/auth';
 import Posts from '@/components/Posts';
+import PostModal from '@/components/PostModal';
 
 const Home: React.FC = () => {
 
@@ -54,6 +55,7 @@ const Home: React.FC = () => {
       alert('An error occurred. Please try again and recheck the details.');
     }
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,6 +94,15 @@ const Home: React.FC = () => {
           <h1 className="text-xl font-medium text-white border-b-2 w-fit">Welcome, {user?.username}!</h1>
           <br />
           <p className="text-white text-xl">Latest posts(With Pagination):</p>
+          <div className="container mx-auto px-4 py-8">
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Create Post
+            </button>
+            <PostModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+          </div>
           <br />
           <Posts />
         </div>

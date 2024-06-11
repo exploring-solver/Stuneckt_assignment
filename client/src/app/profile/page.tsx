@@ -1,5 +1,6 @@
+"use client"; // This must be the first line in the file
+
 import React, { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
 
 interface User {
   email: string;
@@ -9,11 +10,8 @@ interface User {
   exp: number;
 }
 
-interface ProfileProps {
-  user: User | null;
-}
-
-const Profile: React.FC<ProfileProps> = ({ user }) => {
+const Profile: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,18 +24,18 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
       }
 
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/profile`, {
+        const response = await fetch(`${process.env.BACKEND_URL}/users/api/v1/user/details`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        const { user } = await response.json();
+        const data = await response.json();
 
         if (response.ok) {
-          console.log('User details fetched successfully:', user);
+          setUser(data.user);
           setLoading(false);
         } else {
-          console.error('Failed to fetch user details:', user);
+          console.error('Failed to fetch user details:', data.message);
           setLoading(false);
         }
       } catch (error) {
@@ -59,7 +57,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold">{user.username}&apos; Profile</h1>
+      <h1 className="text-3xl font-bold">{user.username}'s Profile</h1>
       <div className="border-t border-gray-200 mt-4 pt-4">
         <p>Email: {user.email}</p>
         <p>User ID: {user.id}</p>
