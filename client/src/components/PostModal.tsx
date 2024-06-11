@@ -12,7 +12,7 @@ const PostModal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen,
         const postData = { textContent, media };
 
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/posts/api/v1/posts`, postData, {
+            const response = await axios.post(`${process.env.BACKEND_URL}/posts/api/v1/posts`, postData, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -21,12 +21,14 @@ const PostModal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen,
 
             if (response.status === 201) {
                 console.log('Post created successfully:', response.data);
+                alert('Posted Successfully.')
                 onClose(); // Close the modal on successful post creation
             } else {
                 console.error('Failed to create post:', response.data);
             }
         } catch (error) {
             console.error('Error creating post:', error);
+            alert('Failed to post please try again.')
         }
     };
 

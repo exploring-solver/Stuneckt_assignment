@@ -49,6 +49,7 @@ const Home: React.FC = () => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.token);
+      alert("Registered Successfully!!")
       window.location.href = '/';
     } else {
       console.error('Failed');
@@ -78,6 +79,7 @@ const Home: React.FC = () => {
 
     if (response.ok) {
       const data = await response.json();
+      alert("Logged in successfully!")
       localStorage.setItem('token', data.token);
       window.location.href = '/';
     } else {
