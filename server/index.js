@@ -1,5 +1,7 @@
-const app = require('./app');
+const express = require('express');
 const config = require('./config');
+const { connectDB } = require('./services/mongoose');
+const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || config.port;
 
