@@ -7,7 +7,7 @@ const follow = require('../src/follow/routes');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    res.send('Welcome to the Snucket API made by aman sharma @exploring-solver!')
+    res.send('Welcome to the  Stuneckt API made by aman sharma @exploring-solver!')
   })
   app.use('/status', status);
   app.use('/users', users);
