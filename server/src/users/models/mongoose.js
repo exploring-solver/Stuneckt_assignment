@@ -1,5 +1,5 @@
-const { Schema } = require('mongoose');
-const { mongoose } = require('../../../services/mongoose');
+// const { Schema } = require('mongoose');
+const mongoose = require('../../../services/mongoose');
 
 const UserSchema = new mongoose.Schema(
   {

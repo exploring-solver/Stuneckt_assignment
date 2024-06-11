@@ -1,5 +1,4 @@
-// const config = require('../../../config');
-const Schema = require('../../users/models/mongoose')
+const User = require("../../users/models/mongoose");
 
 // Follow a user by user ID
 const followUser = async (req, res) => {
@@ -8,12 +7,12 @@ const followUser = async (req, res) => {
     const fUsername  = req.user.username;
 
     try {
-        const user = await Schema.User.findOne({ username });
+        const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const follower = await Schema.User.findOne({ username: fUsername });
+        const follower = await User.findOne({ username: fUsername });
         console.log(fUsername)
         if (!follower) {
             return res.status(404).json({ message: 'Follower not found' });
@@ -22,8 +21,8 @@ const followUser = async (req, res) => {
         const userId = user._id;
         const followerId = follower._id;
 
-        await Schema.User.findByIdAndUpdate(userId, { $addToSet: { followers: followerId } });
-        await Schema.User.findByIdAndUpdate(followerId, { $addToSet: { following: userId } });
+        await User.findByIdAndUpdate(userId, { $addToSet: { followers: followerId } });
+        await User.findByIdAndUpdate(followerId, { $addToSet: { following: userId } });
 
         console.log(`User '${username}' followed by '${fUsername}'`);
         res.status(200).json({ message: 'User followed successfully' });
@@ -42,13 +41,13 @@ const unfollowUser = async (req, res) => {
     try {
         console.log(`Trying to unfollow user '${username}' by '${fUsername}'`);
         
-        const user = await Schema.User.findOne({ username });
+        const user = await User.findOne({ username });
         if (!user) {
             console.log(`User '${username}' not found`);
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const follower = await Schema.User.findOne({ username: fUsername });
+        const follower = await User.findOne({ username: fUsername });
         if (!follower) {
             console.log(`Follower '${fUsername}' not found`);
             return res.status(404).json({ message: 'Follower not found' });
@@ -56,8 +55,8 @@ const unfollowUser = async (req, res) => {
 
         const userId = user._id;
         const followerId = follower._id;
-        await Schema.User.findByIdAndUpdate(userId, { $pull: { followers: followerId } });
-        await Schema.User.findByIdAndUpdate(followerId, { $pull: { following: userId } });
+        await User.findByIdAndUpdate(userId, { $pull: { followers: followerId } });
+        await User.findByIdAndUpdate(followerId, { $pull: { following: userId } });
 
         console.log(`User '${fUsername}' unfollowed user '${username}'`);
         res.status(200).json({ message: 'User unfollowed successfully' });
@@ -75,11 +74,11 @@ const getTotalFollowersFollowing = async (req, res) => {
     const { fUsername } = req.body;
 
     try {
-        const user = await Schema.User.findOne({ username });
+        const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        const follower = await Schema.User.findOne({ fUsername });
+        const follower = await User.findOne({ fUsername });
         if (!follower) {
             return res.status(404).json({ message: 'Follower not found' });
         }
@@ -99,12 +98,12 @@ const getAllFollowers = async (req, res) => {
     const { username } = req.params;
 
     try {
-        const user = await Schema.User.findOne({ username });
+        const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const followers = await Schema.User.find({ _id: { $in: user.followers } }, 'username');
+        const followers = await User.find({ _id: { $in: user.followers } }, 'username');
         const followerUsernames = followers.map(follower => follower.username);
 
         res.status(200).json({ followers: followerUsernames });
@@ -119,12 +118,12 @@ const getAllFollowing = async (req, res) => {
     const { username } = req.params;
 
     try {
-        const user = await Schema.User.findOne({ username });
+        const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const following = await Schema.User.find({ _id: { $in: user.following } }, 'username');
+        const following = await User.find({ _id: { $in: user.following } }, 'username');
         const followingUsernames = following.map(following => following.username);
 
         res.status(200).json({ following: followingUsernames });

@@ -1,13 +1,9 @@
-const express = require('express');
 const config = require('./config');
-const { connectDB } = require('./services/mongoose');
-const mongoose = require('mongoose');
+const app = require('./app')
 
 const PORT = process.env.PORT || config.port;
 
 const start = async () => {
-  const app = express();
-
   // Dynamically import AdminJS and @adminjs/mongoose
   const { default: AdminJS } = await import('adminjs');
   const AdminJSMongoose = await import('@adminjs/mongoose');
@@ -41,4 +37,4 @@ const start = async () => {
   });
 };
 
-connectDB().then(start);
+start();

@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const postSchema = new Schema({
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
@@ -32,7 +32,7 @@ const postSchema = new Schema({
   comments: [
     {
       user: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
       },

@@ -1,8 +1,8 @@
 const Bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../../../config');
-const schemes = require('../models/mongoose');
 const { faker } = require('@faker-js/faker');
+const User = require('../models/mongoose');
 
 const signUp = async (res, parameters) => {
   const {
@@ -15,7 +15,7 @@ const signUp = async (res, parameters) => {
   } = parameters;
 
   // Check if username or email already exist
-  const existingUser = await schemes.User.findOne({
+  const existingUser = await User.findOne({
     $or: [{ email }, { username }],
   });
 
@@ -31,7 +31,7 @@ const signUp = async (res, parameters) => {
   }
 
   if (password === passwordConfirmation) {
-    const newUser = schemes.User({
+    const newUser = User({
       password: Bcrypt.hashSync(password, 10),
       email,
       username,
@@ -81,7 +81,7 @@ const login = async (res, parameters) => {
 
   try {
     // Check if the user exists
-    const user = await schemes.User.findOne({
+    const user = await User.findOne({
       $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
     });
 
@@ -122,7 +122,7 @@ const userDetails = async (res, parameters) => {
 
   try {
     // Fetch user details based on userId
-    const user = await schemes.User.findById(userId);
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({
@@ -177,7 +177,7 @@ const userDetailsByUsername = async (res, parameters) => {
 
   try {
     // Fetch user details based on username
-    const user = await schemes.User.findOne({ username });
+    const user = await User.findOne({ username });
 
     if (!user) {
       return res.status(404).json({

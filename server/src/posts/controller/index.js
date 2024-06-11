@@ -1,6 +1,7 @@
 // const config = require('../../../config');
 const Post = require('../models/mongoose');
-const Schema = require('../../users/models/mongoose')
+const Schema = require('../../users/models/mongoose');
+const User = require('../../users/models/mongoose');
 
 // Controller: create a post
 const createPost = async (req, res) => {
@@ -29,7 +30,6 @@ const createPost = async (req, res) => {
   }
 };
 
-// Controller : get all posts
 const getAllPosts = async (req, res) => {
   console.log('Received request to get all posts');
   const { page = 1, limit = 10 } = req.query;
@@ -38,7 +38,10 @@ const getAllPosts = async (req, res) => {
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(limit, 10),
-      populate: 'user', // Populate the 'user' field with the username
+      populate: {
+        path: 'user', // Populate the 'user' field with the 'User' document
+        select: 'username', // Only include the 'username' field
+      },
       select: '-__v', // Exclude the '__v' field from the query
     };
 
@@ -55,6 +58,9 @@ const getAllPosts = async (req, res) => {
     res.status(500).json({ message: 'Failed to retrieve posts', error: error.message });
   }
 };
+
+module.exports = getAllPosts;
+
 
 
 // Controller: get all for existing user
@@ -118,7 +124,7 @@ const getUserPosts = async (req, res) => {
   const username = req.params.id;
 
   try {
-    const user = await Schema.User.findOne({ username });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

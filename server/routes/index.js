@@ -14,7 +14,12 @@ module.exports = (app) => {
   app.use('/posts', posts);
   app.use('/follow', follow);
   // app.use('/users', validateAuth.checkIfAuthenticated, getData.getGeoip, users);
-  app.use('*', (req, res) => {
-    res.send('Not found!!!');
+  app.use('*', (req, res, next) => {
+    if (req.originalUrl.startsWith('/admin')) {
+      return next(); // Pass the request to the next middleware
+    }
+
+    // For all other URLs, return a 404 response
+    res.status(404).send('Not found!!!');
   });
 };
