@@ -5,7 +5,7 @@ const Posts: React.FC = () => {
     const [posts, setPosts] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    // const { token } = useAuth();
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -17,13 +17,14 @@ const Posts: React.FC = () => {
                     }
                 });
                 const data = await response.json();
-                setPosts(data.result.docs);
+                // Reverse the order of posts
+                const reversedPosts = data.result.docs.reverse();
+                setPosts(reversedPosts);
                 setTotalPages(data.result.totalPages);
             } catch (error) {
                 console.error('Error fetching posts:', error);
             }
         };
-
 
         fetchPosts();
     }, [currentPage]);
